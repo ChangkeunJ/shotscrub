@@ -2,6 +2,8 @@
 
 Finds the keys, tokens and passwords in a screenshot and covers them, in the browser.
 
+![A terminal with its keys and tokens, then the same terminal with them covered](demo.gif)
+
 Live at https://shotscrub.pages.dev
 
 The screenshots worth scrubbing are the ones you cannot hand to a website. A terminal with
