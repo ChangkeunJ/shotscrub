@@ -1,0 +1,34 @@
+{
+  "name": "shotscrub",
+  "version": "0.1.0",
+  "description": "Black out the secrets in a screenshot without the screenshot leaving your browser",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --test dist/test/*.test.js",
+    "web": "npm run tess && vite",
+    "build:web": "npm run tess && tsc -p web/tsconfig.json && vite build",
+    "check": "tsc && tsc -p web/tsconfig.json",
+    "deploy": "npm run build:web && wrangler pages deploy --branch main",
+    "tess": "scripts/tess.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^5.7.2",
+    "vite": "^8.2.2",
+    "wrangler": "^3.114.17"
+  }
+}
