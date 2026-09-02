@@ -109,11 +109,15 @@ export function App() {
     if (drag && drag.w > 4 && drag.h > 4) setMarks((m) => [...m, { ...drag, kind: 'drawn by hand', on: true }])
     else if (drag) {
       const p = { x: drag.x, y: drag.y }
-      setMarks((m) =>
-        m.map((k) =>
-          p.x >= k.x && p.x <= k.x + k.w && p.y >= k.y && p.y <= k.y + k.h ? { ...k, on: !k.on } : k,
-        ),
-      )
+      setMarks((m) => {
+        let i = m.length
+        while (i-- > 0) {
+          const k = m[i]!
+          if (p.x >= k.x && p.x <= k.x + k.w && p.y >= k.y && p.y <= k.y + k.h) break
+        }
+        return i < 0 ? m : m.map((k, j) => (j === i ? { ...k, on: !k.on } : k))
+        // only the box on top flips, so uncovering a hand-drawn box never exposes what sat under it
+      })
     }
     from.current = null
     setDrag(null)

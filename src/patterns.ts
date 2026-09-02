@@ -26,14 +26,22 @@ const LABELLED =
 const PRIVATE = /^(?:10\.|127\.|169\.254\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/
 const IP = /\b(?:\d{1,3}\.){3}\d{1,3}\b/g
 
+// A URL is only a secret when it carries one.
+const PLAIN_URL = /^[a-z][a-z0-9+.-]*:\/\/(?![^/@\s]+:[^/@\s]+@)[^\s]*$/i
+const LOADED_URL = /[?&#](?:token|key|secret|password|passwd|sig|signature|auth|access_token|api_key)=/i
+
 export function keyish(w: string): boolean {
-  if (w.length < 20) return false
-  if (!/[A-Za-z]/.test(w) || !/\d/.test(w)) return false
-  if (/^[A-Za-z]+$/.test(w) || /\s/.test(w)) return false
-  const kinds = [/[a-z]/, /[A-Z]/, /\d/, /[^A-Za-z0-9]/].filter((r) => r.test(w)).length
-  return kinds >= 3 && new Set(w).size >= w.length * 0.5
+  if (w.length < 20 || /\s/.test(w)) return false
+  if (!/[a-z]/.test(w) || !/[A-Z]/.test(w) || !/\d/.test(w)) return false
+  if (/^[\/~.]/.test(w) || /^[A-Za-z]:\\/.test(w)) return false
+  if (PLAIN_URL.test(w) && !LOADED_URL.test(w)) return false
+  return new Set(w).size >= w.length * 0.5
   // OCR mangles a random key character by character, so no exact rule survives it.
-  // Shape does: long, mixed case, digits, and few repeats is a token and not prose.
+  // Shape does. All three of lower case, upper case and digits is the line: every
+  // vendor key has them, and what shows up in logs does not. A timestamp has no
+  // lower case, a sha and a uuid have no upper case, a version number has almost
+  // no letters. Paths and plain URLs are excluded by name because a mixed case
+  // path is common and is never a secret by itself.
 }
 
 function push(out: Find[], at: number, end: number, kind: string): void {

@@ -37,9 +37,20 @@ test('takes a whole connection string, credentials and all', () => {
 
 test('shape catches what ocr mangled', () => {
   assert.equal(keyish('kR8vQ2mZ-x7Lp0WdT4nBj6Yc'), true)
+  assert.equal(keyish('wJalrXUtnFEMIK7MDENGbPxRfiCY'), true)
   assert.equal(keyish('screenshot'), false)
   assert.equal(keyish('aaaaaaaaaaaaaaaaaaaa1A'), false)
-  assert.equal(keyish('2026-09-02T00:00:00Z'), false)
+})
+
+test('shape leaves what a log is made of', () => {
+  assert.equal(keyish('2026-09-02T15:08:43Z'), false)
+  assert.equal(keyish('7f3c9a12-4b8e-4d2a-9c1e-5a6b7c8d9e0f'), false)
+  assert.equal(keyish('3e1f9c2a7b4d8e6f0a1b2c3d4e5f6a7b8c9d0e1f'), false)
+  assert.equal(keyish('2.3.1-rc.4+build.20260902'), false)
+  assert.equal(keyish('/home/deploy/App-v2.3/Build.2026.log'), false)
+  assert.equal(keyish('https://api.example.com/v2/Users/42'), false)
+  assert.equal(keyish('https://api.example.com/cb?token=aB3dE5fG7hJ9'), true)
+  assert.equal(keyish('https://Admin:Hunter2x@db.example.com/x'), true)
 })
 
 test('claims a span once, under its most specific name', () => {
