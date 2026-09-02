@@ -11,7 +11,7 @@
     "web": "npm run tess && vite",
     "build:web": "npm run tess && tsc -p web/tsconfig.json && vite build",
     "check": "tsc && tsc -p web/tsconfig.json",
-    "deploy": "npm run build:web && wrangler pages deploy --branch main",
+    "deploy": "npm run build:web && wrangler pages deploy public --project-name shotscrub --branch main",
     "tess": "scripts/tess.sh"
   },
   "engines": {
