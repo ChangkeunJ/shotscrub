@@ -4,7 +4,11 @@ Finds the keys, tokens and passwords in a screenshot and covers them, in the bro
 
 ![A terminal with its keys and tokens, then the same terminal with them covered](demo.gif)
 
-Live at https://shotscrub.pages.dev
+[Try it in your browser](https://shotscrub.pages.dev). No account or install needed.
+
+Want to help? Pick an [open issue](https://github.com/ChangkeunJ/shotscrub/issues?q=is%3Aissue+is%3Aopen)
+and see [how to contribute](CONTRIBUTING.md). Missed secrets and false positives are useful
+reports, just recreate them with fake values before sharing a screenshot.
 
 The screenshots worth scrubbing are the ones you cannot hand to a website. A terminal with
 a `.env` open in it, a dashboard with a live connection string, the curl command you were
@@ -55,8 +59,10 @@ Email and IP addresses keep tight boxes, because a leaked `.com` costs nothing.
 
 ## Running it
 
+Use Node 22.12 or later, or Node 20.19 or later in the 20.x series.
+
 ```
-npm install
+npm ci
 npm test        # the detection rules and the box geometry
 npm run web     # dev server
 npm run build:web
