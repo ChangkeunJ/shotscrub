@@ -2,7 +2,9 @@
 
 Finds the keys, tokens and passwords in a screenshot and covers them, in the browser.
 
-![A terminal with its keys and tokens, then the same terminal with them covered](demo.gif)
+Sample image. All credentials shown below are fake.
+
+![Sample terminal with fake credentials, before and after redaction](demo.gif)
 
 [Try it in your browser](https://shotscrub.pages.dev). No account or install needed.
 
