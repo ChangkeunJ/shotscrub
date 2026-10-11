@@ -15,7 +15,7 @@
     "tess": "scripts/tess.sh"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "react": "^19.2.8",
